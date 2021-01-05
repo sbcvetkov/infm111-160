@@ -20,7 +20,7 @@ BEGIN
    END IF;
    EXCEPTION
     WHEN e_invalid_email THEN
-       DBMS_OUTPUT.put_line ('The email address you have entered is invalid! -> '||:new.email);
+       DBMS_OUTPUT.put_line ('The email address you have entered is invalid! -> '||:new.email || '. This entry will be deleted!');
 end t_creators_email_check;
 /
 
@@ -33,6 +33,7 @@ create or replace trigger t_donators_email_check
     for each row
 DECLARE
    e_invalid_email EXCEPTION;
+   e_anonymous EXCEPTION;
    b_isvalid   BOOLEAN;
 BEGIN
    b_isvalid :=
@@ -41,13 +42,18 @@ BEGIN
    IF b_isvalid AND :new.anonymous = 'NO'
    THEN
       :new.email := lower(:new.email);
+   ELSIF b_isvalid AND :new.anonymous = 'YES'
+   THEN
+      RAISE e_anonymous;
    ELSIF NOT b_isvalid AND :new.anonymous = 'NO'
    THEN
       RAISE e_invalid_email;
    END IF;
    EXCEPTION
     WHEN e_invalid_email THEN
-       DBMS_OUTPUT.put_line ('The email address you have entered is invalid! -> '||:new.email);
+       DBMS_OUTPUT.put_line ('The email address you have entered is invalid! -> '||:new.email || '. This entry will be deleted!');
+    WHEN e_anonymous THEN
+       DBMS_OUTPUT.put_line ('The email address you have entered is valid,  but you opted for anonymity! This entry will be automatically deleted!');
 end t_donators_email_check;
 /
 
