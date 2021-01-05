@@ -22,7 +22,6 @@ BEGIN
     WHEN e_invalid_email THEN
        DBMS_OUTPUT.put_line ('The email address you have entered is invalid! -> '||:new.email || '. This entry will be deleted!');
 end t_creators_email_check;
-/
 
 -- check if email is legitimate
 -- if the email is legitimate, apply the lower method
@@ -55,3 +54,12 @@ BEGIN
     WHEN e_anonymous THEN
        DBMS_OUTPUT.put_line ('The email address you have entered is valid,  but you opted for anonymity! This entry will be automatically deleted!');
 end t_donators_email_check;
+
+-- trigger - add to campaign_sum when new donation to the same campaign
+create or replace trigger t_add_donation_to_campaign
+    before insert or update
+    on donations
+    for each row
+BEGIN
+    campaign_ops.p_add_donation_to_campaign(:new.campaign_id, :new.donation_sum);
+end t_add_donation_to_campaign;
