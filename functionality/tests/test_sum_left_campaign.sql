@@ -6,7 +6,7 @@ BEGIN
     l_sum_left := f_sum_left_campaign(l_campaign_id);
     IF l_sum_left IS NOT NULL 
     THEN
-        dbms_output.put_line('Total sum for campaign with ID of ' || l_campaign_id || ' is $'|| f_sum_left_campaign(l_campaign_id));
+        dbms_output.put_line('Total sum for campaign with ID of ' || l_campaign_id || ' is $'|| l_sum_left);
     END IF;
 END;
 
@@ -18,6 +18,6 @@ BEGIN
     l_sum_left := f_sum_left_campaign(l_campaign_id);
     IF l_sum_left IS NOT NULL 
     THEN
-        dbms_output.put_line('Total sum for campaign with ID of ' || l_campaign_id || ' is $'|| f_sum_left_campaign(l_campaign_id));
+        dbms_output.put_line('Total sum for campaign with ID of ' || l_campaign_id || ' is $'|| l_sum_left);
     END IF;
 END;
