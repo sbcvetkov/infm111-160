@@ -25,4 +25,3 @@ BEGIN
     when CAMPAIGN_NOT_EXIST then
         dbms_output.put_line('Donations for campaign with id of '|| v_campaign_id ||' do not exist.');
 END f_total_sum_campaign;
-/
