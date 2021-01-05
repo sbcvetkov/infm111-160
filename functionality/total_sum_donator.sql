@@ -6,7 +6,7 @@ IS
     DONATOR_NOT_EXIST exception;
     CURSOR c_donations
     IS
-        select count(1)
+        select count(*)
         from donations
         where donator_id = v_donator_id;
     n_count number;
@@ -17,7 +17,6 @@ BEGIN
 
     if n_count > 0 then
         select sum(donation_sum) into l_total_sum from donations where donator_id = v_donator_id;
-        dbms_output.put_line('Donator with ID of '|| v_donator_id ||' has donated $'|| l_total_sum ||'.');
         RETURN l_total_sum;
     else
         raise DONATOR_NOT_EXIST;
@@ -25,5 +24,6 @@ BEGIN
     EXCEPTION
     when DONATOR_NOT_EXIST then
         dbms_output.put_line('Donations with donator with id of '|| v_donator_id ||' do not exist.');
+        return null;
 END f_total_sum_donator;
 /
