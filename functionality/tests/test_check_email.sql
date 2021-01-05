@@ -65,6 +65,6 @@ BEGIN
         '394 Cantaloube Street'
     );
 
-    p_creators_email_delete;
-    p_donators_email_delete;
+    people_ops.p_creators_email_delete;
+    people_ops.p_donators_email_delete;
 END;
