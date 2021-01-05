@@ -17,7 +17,6 @@ BEGIN
 
     if n_count > 0 then
         select sum(donation_sum) into l_total_sum from donations where donator_id = v_campaign_id;
-        dbms_output.put_line('Campaign with ID of '|| v_campaign_id ||' has collected a sum of $'|| l_total_sum ||'.');
         RETURN l_total_sum;
     else
         raise CAMPAIGN_NOT_EXIST;
