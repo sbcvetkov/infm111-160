@@ -36,5 +36,5 @@ BEGIN
         sysdate
     );
 
-  dbms_output.put_line('Total number of donations for today -> ' || f_donations_today );
+  dbms_output.put_line('Total number of donations for today -> ' || campaign_ops.f_donations_today );
 END;
