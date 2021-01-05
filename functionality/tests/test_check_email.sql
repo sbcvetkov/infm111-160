@@ -62,3 +62,9 @@ insert into creators (
     123456789,
     '394 Cantaloube Street'
 );
+
+-- execute this to purge the invalid entries in Donators and Creators
+BEGIN
+    p_creators_email_delete;
+    p_donators_email_delete;
+END;
