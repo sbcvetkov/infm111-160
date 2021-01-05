@@ -1,3 +1,3 @@
 BEGIN
-    p_set_expired_status;
+    campaign_ops.p_set_expired_status;
 END;
